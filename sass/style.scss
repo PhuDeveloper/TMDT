@@ -1,0 +1,102 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+body {
+  background: url(https://bigdata-vn.com/wp-content/uploads/2021/10/1633867229_653_Background-book-%E2%80%93-Background-sach-dep-an-tuong-va-sang.jpg) fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -180px;
+}
+.header {
+  background-color: rgb(27, 27, 27);
+  opacity: 0.6;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  .headerx {
+    display: flex;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+
+      i {
+        color: #fff;
+        margin-right: 10px;
+      }
+      span {
+        color: #fff;
+      }
+    }
+    .listMenu {
+      &-ul {
+        display: flex;
+
+        .menu {
+          padding: 0 20px;
+          font-weight: 500;
+          a {
+            color: #fff;
+          }
+        }
+        .space {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+// Style Đăng nhập
+body {
+  
+  }
+  
+  .btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+  }
+  
+ 
+  
+  .btn-facebook {
+    color: white !important;
+    background-color: #3b5998;
+  }
+//style đăng kí
+.divider-text {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;   
+    z-index: 2;
+}
+.divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+}
+
+.btn-facebook {
+    background-color: #405D9D;
+    color: #fff;
+}
+.btn-twitter {
+    background-color: #42AEEC;
+    color: #fff;
+}
+// style đăng kí trạm đón 
