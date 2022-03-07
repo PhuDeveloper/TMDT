@@ -1,0 +1,25 @@
+.themTaiXe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .pattern {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.phanTuyen {
+  .select {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+    .tuyen {
+    }
+    .xeBus {
+    }
+  }
+  .bangPhanTuyen {
+    padding-top: 30px;
+  }
+}
