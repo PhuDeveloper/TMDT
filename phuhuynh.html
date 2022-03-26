@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -33,7 +34,14 @@
                 </div>
                 <div class="listMenu">
                     <ul class="listMenu-ul">
-                        <li class="menu"><a href="#">Phụ huynh</a></li>
+                        <li class="menu phuHuynhClick"><a href="#">Phụ huynh</a>
+                            <div class="menux">
+                                <div class="liMenux doiThongTinCaNhan"><a href="#">Đổi thông tin cá
+                                        nhân </a>
+                                </div>
+                                <div class="liMenux doiMatKhau"><a href="#">Đổi mật khẩu </a></div>
+                            </div>
+                        </li>
                         <li class="menu"><a href="#"></a></li>
                         <li class="menu"><a href="dangNhap.html">Đăng xuất </a></li>
                     </ul>
@@ -45,37 +53,65 @@
         <div class="navBar">
             <div class="container">
                 <div class="listOption">
-                    <div class="liList xemTT"><a href="#">Đăng kí điểm đón</a></div>
-                    <div class="liList dongHP"><a href="#">Đóng học phí </a></div>
-                    <div class="liList"><a href="#">Test</a></div>
+                    <div class="liList dangKiDiemDon"><a href="#">Đăng kí điểm đón</a></div>
+                    <div class="liList dongHocPhi"><a href="#">Đóng học phí </a></div>
+
+                    <!-- <div class="liList"><a href="#">Test</a></div> -->
                 </div>
 
             </div>
         </div>
         <div class="right">
-            <div class="rightx thongtinphuhuynh">
-                <div class="thongtinnamhoc">
-                    <h2>Học kì 1 (2020-2021)</h2>
+            <div id="thongTinPhuHuynh" class="rightx ">
+                <div>
+                    <ul class="test">
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="thongTinNamHoc">
+                    <h2>Học kì: <span class="hocKi">1</span> (<span
+                            class="namHoc">2020-2021</span>)
+                    </h2>
 
-                    <h4>Phụ huynh:Trần Văn Nam</h4>
+                    <h4>Phụ huynh: <span class="spanTenPhuHuynh">Trần Văn A</span></h4>
 
                 </div>
-                <div class="thongtincon">
-                    <h5 class="tencon">Trần Hồng Quân</h5>
-                    <p class="lop">Lớp : 4ABC</p>
-                </div>
-                <div class="thongtincon">
-                    <h5 class="tencon">Trần Hồng Bình</h5>
-                    <p>Lớp : 6GHJ</p>
+                <div class="danhSachCon">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <!-- <th scope="col">Id</th> -->
+
+                                <th scope="col">Mã học sinh</th>
+                                <th scope="col">Họ</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Đăng kí</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="DSC">
+
+
+
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
-            <div class="rightx dangkidd">
+            <div id="dangKiDiemDon" class="rightx ">
                 <div class="card bg-light">
                     <div class="thongtinhocki">
-                        <h4>HK1:2020-2021</h4>
-                        <h4 class="tencondk"></h4>
-                        <h5 class="lophoc"></h5>
+                        <div class="thongTinNamHoc">
+                            <h2>Học kì: <span class="hocKi">1</span> (<span
+                                    class="namHoc">2020-2021</span>)
+                            </h2>
+
+
+
+                        </div>
+                        <h4 class="maHocSinhConDangKi"></h4>
+                        <h4 class="tenConDangKi"></h4>
+
                     </div>
                     <article class="card-body mx-auto" style="max-width: 400px;">
                         <h4 class="card-title mt-3 text-center" style="height: 50px;"></h4>
@@ -85,35 +121,92 @@
                         <p class="divider-text">
                             <span class="bg-light">OR</span>
                         </p>
-                        <form>
 
 
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i
-                                            class="fa-solid fa-location-pin"></i> </span>
-                                </div>
-                                <select class="form-control">
-                                    <option selected=""> Chọn trạm đón</option>
-                                    <option>Trạm A</option>
-                                    <option>Trạm B</option>
-                                    <option>TRạm C</option>
-                                </select>
+
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i
+                                        class="fa-solid fa-location-pin"></i> </span>
                             </div>
+                            <select id="id_station" class="form-control">
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block"> Submid
-                                </button>
-                            </div>
+                                <!-- <option class="tram" ></option> -->
 
-                        </form>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button id="submitTram" type="submit" class="btn btn-primary btn-block">
+                                Submid
+                            </button>
+                        </div>
+
+
                     </article>
                 </div>
             </div>
-            <div class="rightx donghocphi">
+            <div id="dongHocPhi" class="rightx ">
 
                 Đóng học phí
 
+            </div>
+            <div id="doiMatKhau" class="rightx ">
+                <h3>Đổi mật khẩu</h3>
+                <div class="formDoiMatKhau">
+                    <div class="input-group mb-3">
+
+                        <input disabled id="emailPH" type="email" class="form-control"
+                            placeholder="Tên đăng nhập" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="old_password" type="password" class="form-control"
+                            placeholder="Nhập mật khẩu cũ" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="new_password" type="password" class="form-control"
+                            placeholder="Nhập mật khẩu mới" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="new_password1" type="password" class="form-control"
+                            placeholder="Nhập lại mật khẩu mới" aria-describedby="basic-addon1">
+                    </div>
+                    <button id="btnPhuHuynhDoiMatkhau" type="button" class="btn btn-primary">Đổi
+                        mật
+                        khẩu</button>
+                </div>
+            </div>
+            <div id="doiThongTinCaNhan" class="rightx ">
+                <h3>Cập nhật thông tin cá nhân</h3>
+                <div class="formCapNhatThongTin">
+                    <div class="form-floating mb-3">
+                        <input disabled type="text" class="form-control" id="email">
+                        <label for="floatingInput">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="firstName">
+                        <label for="floatingInput">Họ</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lastName">
+                        <label for="floatingInput">Tên</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="address">
+                        <label for="floatingInput">Địa chỉ</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="phoneNum">
+                        <label for="floatingInput">Số đt</label>
+                    </div>
+                    
+                    <button id="btnPHCapNhatThongTin" type="button" class="btn btn-primary">Cập
+                        nhật</button>
+                </div>
             </div>
         </div>
     </div>

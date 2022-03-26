@@ -33,9 +33,17 @@
                 </div>
                 <div class="listMenu">
                     <ul class="listMenu-ul">
-                        <li class="menu"><a href="#">Admin</a></li>
+                        <li class="menu adminClick"><a href="#">Admin</a>
+                            <div class="menux">
+                                <div class=" liMenux doiThongTinMatKhau"><a href="#">Đổi mật khẩu</a>
+                                </div>
+                                <div class=" liMenux doiThongTinCaNhan"><a href="#">Đổi thông tin cá
+                                        nhân</a>
+                                </div>
+                            </div>
+                        </li>
                         <li class="menu"><a href="#"></a></li>
-                        <li class="menu"><a href="dangNhap.html">Đăng xuất </a></li>
+                        <li class="menu"><a href="dangnhapnhanvien.html">Đăng xuất </a></li>
                     </ul>
                 </div>
             </div>
@@ -46,55 +54,158 @@
             <div class="container">
 
                 <div class="listOption">
-                    <div class="liList themTx"><a href="#">Thêm tài xế</a></div>
-                    <div class="liList phanT"><a href="#">Phân tuyến Bus</a></div>
-                    <div class="liList phanCaLV"><a href="#">Phân ca làm việc</a></div>
-                    <div class="liList"><a href="#">Test</a></div>
+                    <div class="liList quanLyTaiXe"><a href="#">Quản lý nhân viên</a></div>
+                    <div class="liList phanTuyenBus"><a href="#">Phân tuyến Bus</a></div>
+                    <div class="liList quanLyCaLamViec"><a href="#">Quản lý ca làm việc</a>
+                    </div>
+
                 </div>
 
             </div>
         </div>
         <div class="right">
-            <div class="rightx themTaiXe">
-                <div class="pattern">
-                    <h3>Thêm tài xế</h3>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username"
-                            aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username"
-                            aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username"
-                            aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username"
-                            aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username"
-                            aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username"
-                            aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button type="button" class="btn btn-danger">Thêm</button>
+            <div id="quanLyTaiXe" class="rightx ">
+                <h3>Quản lý tài xế</h3>
+                <div class="clsModal1">
+                    <button id="modalx" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Thêm tài xế
+                    </button>
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thêm tài xế
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="account" type="text" class="form-control"
+                                            placeholder="Tên đăng nhập"
+                                            aria-describedby="addon-wrapping">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="first_name" type="text" class="form-control"
+                                            placeholder="Họ" aria-describedby="addon-wrapping">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="last_name" type="text" class="form-control"
+                                            placeholder="Tên" aria-describedby="addon-wrapping">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="address" type="text" class="form-control"
+                                            placeholder="Địa chỉ"
+                                            aria-describedby="addon-wrapping">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="password" type="password" class="form-control"
+                                            placeholder="Mật khẩu">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="phone_num" type="text" class="form-control"
+                                            placeholder="Số điện thoại"
+                                            aria-describedby="addon-wrapping">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="email" type="text" class="form-control"
+                                            placeholder="Email" aria-describedby="addon-wrapping">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="date_of_birth" type="date" class="form-control"
+                                            placeholder="Ngày sinh"
+                                            aria-describedby="addon-wrapping">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+
+                                        <input id="driver_license" type="text" class="form-control"
+                                            placeholder="Số hiệu bằng lái"
+                                            aria-describedby="addon-wrapping">
+                                        </select>
+                                    </div>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <select id="id_role" class="form-select"
+                                            aria-label="Default select example">
+
+                                            <option value="1">Tài xế</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Đóng</button>
+                                    <button id="btnThemTaiXe" type="button"
+                                        class="btn btn-primary">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clsTable">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <!-- <th scope="col">Id</th> -->
+
+                                <th scope="col">Tên đăng nhập</th>
+                                <th scope="col">Họ</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Số điện thoại</th>
+                            </tr>
+                        </thead>
+                        <tbody class="danhSachNhanVien">
+                            <!-- <tr>
+                                <td>Mark</td>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                
+
+
+                            </tr> -->
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal fade" id="exampleModalx" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Bạn có chắc muốn xóa nhân viên này ?</h3>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Đóng</button>
+                                <button type="button" name="dongYXoaNhanVien"
+                                    data-bs-dismiss="modal" class="btn btn-primary">Xóa</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="rightx phanTuyen">
+            <div id="phanTuyenBus" class="rightx ">
                 <div class="select">
                     <div class="tuyen"><select class="form-select"
                             aria-label="Default select example">
@@ -126,7 +237,7 @@
                     </div>
                 </div>
                 <div class="bangPhanTuyen">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
@@ -157,10 +268,108 @@
                     </table>
                 </div>
             </div>
-            <div class="rightx phancalamviec">
+            <div id="quanLyCaLamViec" class="rightx ">
 
-                Phân ca làm việc
+                <div class="selectPhanCa">
+                    <div class="ngayPhanCa">
+                        
+                        <input type="date" name="" id="ngayLamViec">
+                    </div>
+                    <div class="taiXePhanCa">
+                        
+                        <select id="id_staff" class="form-select" aria-label="Default select example">
+                            <option selected>Chọn tài xế</option>
+                           
+                        </select>
+                    </div>
+                    <div class="xeBusPhanCa">
+                      
+                        <select id="id_bus" class="form-select" aria-label="Default select example">
+                            <option selected>Chọn bus</option>
+                           
+                        </select>
+                    </div>
+                   
+                    <div class="btn-group" role="group" aria-label="Basic example">
 
+                        <button id="btnPhanCa" type="button" class="btn btn-primary">Submid</button>
+                    </div>
+                </div>
+                <div class="bangPhanCa">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Tài xế</th>
+                                <th scope="col">Bus</th>
+                                <th scope="col">Ngày làm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="doiThongTinMatKhau" class="rightx">
+                <h3>Đổi mật khẩu</h3>
+                <div class="formDoiMatKhau">
+                    <div class="input-group mb-3">
+
+                        <input disabled id="accountt" type="text" class="form-control"
+                            placeholder="Tên đăng nhập" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="old_password" type="password" class="form-control"
+                            placeholder="Nhập mật khẩu cũ" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="new_password" type="password" class="form-control"
+                            placeholder="Nhập mật khẩu mới" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="new_password1" type="password" class="form-control"
+                            placeholder="Nhập lại mật khẩu mới" aria-describedby="basic-addon1">
+                    </div>
+                    <button id="btnAdDoiMatkhau" type="button" class="btn btn-primary">Đổi mật
+                        khẩu</button>
+                </div>
+            </div>
+            <div id="doiThongTinCaNhan" class="rightx">
+                <h3>Cập nhật thông tin cá nhân</h3>
+                <div class="formCapNhatThongTin">
+                    <div class="form-floating mb-3">
+                        <input disabled type="text" class="form-control"
+                            id="idStaff">
+                        <label for="floatingInput">Tên đăng nhập</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="firstName">
+                        <label for="floatingInput">Họ</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lastName">
+                        <label for="floatingInput">Tên</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="addressx">
+                        <label for="floatingInput">Địa chỉ</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="phoneNum">
+                        <label for="floatingInput">Số đt</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="driverLicense">
+                        <label for="floatingInput">Mã bằng lái</label>
+                    </div>
+                    <button id="btnAdCapNhatThongTin" type="button" class="btn btn-primary">Cập
+                        nhật</button>
+                </div>
             </div>
         </div>
     </div>
@@ -170,7 +379,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 
 </html>

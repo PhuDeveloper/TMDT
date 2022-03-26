@@ -1,0 +1,50 @@
+#lichlamviec {
+}
+#doiMatKhau {
+  display: none;
+}
+#thongTinCaNhan {
+  display: none;
+}
+#doiMatKhau {
+  display: none;
+  h3 {
+    text-align: center;
+    padding: 30px 0;
+  }
+  .formDoiMatKhau {
+    width: 400px;
+    transform: translateX(65%);
+    padding-top: 70px;
+    #btnAdDoiMatkhau {
+      margin: 20px 135px;
+    }
+  }
+}
+.menux {
+  position: absolute;
+  display: none;
+  top: 50px;
+  z-index: 9;
+  background-color: #212529;
+  .liMenux {
+    
+   padding: 10px;
+   }
+}
+#thongTinCaNhan {
+  display: none;
+  height: 650px;
+  h3 {
+    text-align: center;
+    padding: 30px 0;
+  }
+  .formCapNhatThongTin {
+    width: 400px;
+    transform: translateX(65%);
+
+    #btnAdCapNhatThongTin {
+      margin: 20px 135px;
+    }
+  }
+}

@@ -1,25 +1,10 @@
 $(document).ready(function () {
   //Xử lý click thanh navBar
-  $(".themTx").click(function (e) {
-    $(".themTaiXe").show();
-    $(".phancalamviec").hide();
-    $(".phanTuyen").hide();
-  });
-  $(".phanT").click(function (e) {
-    $(".themTaiXe").hide();
-    $(".phancalamviec").hide();
-    $(".phanTuyen").show();
-  });
-  $(".phanCaLV").click(function (e) {
-    $(".themTaiXe").hide();
-    $(".phancalamviec").show();
-    $(".phanTuyen").hide();
-  });
 });
 
 let number;
 var email;
-const laymaXn = (e) => {
+const laymaXn = async (e) => {
   email = $(".emailxacnhan").val().trim();
   var mail = JSON.stringify({ email: email });
 
@@ -30,7 +15,8 @@ const laymaXn = (e) => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      if (res.result === true) {
+      console.log(res);
+      if (res.result == true) {
         $(".dangki2").show();
         $(".dangki1").hide();
         $(".dangki3").hide();
@@ -42,7 +28,7 @@ const laymaXn = (e) => {
     },
   });
 };
-const loadinfoparen = () => {
+const loadInfoParen = async () => {
   var mail = JSON.stringify({ email: email });
   $.ajax({
     type: "POST",
@@ -51,11 +37,16 @@ const loadinfoparen = () => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      $("#emailPH").val(res.email)
+      console.log(res[0]);
+      $("#emailPH").val(res[0].email);
+      $("#hoPH").val(res[0].last_name);
+      $("#tenPH").val(res[0].first_name);
+      $("#diachiPH").val(res[0].address);
+      $("#sdtPH").val(res[0].phone_num);
     },
   });
 };
-const xacnhanma = (e) => {
+const xacnhanma = async (e) => {
   var manhapvao = $("#phuhuynhnhap").val().trim();
   var magoc = number;
   console.log(manhapvao);
@@ -73,8 +64,8 @@ const xacnhanma = (e) => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      
-      if (res.result === true) {
+      if (res.result == true) {
+        loadInfoParen();
         $(".dangki2").hide();
         $(".dangki1").hide();
         $(".dangki3").show();
@@ -84,6 +75,53 @@ const xacnhanma = (e) => {
     },
   });
 };
+const layDanhSachCon = () => {};
+const taoMoiTaikhoan = () => {
+  var emailTmp = $(".emailxacnhan").val();
+  var data = JSON.stringify({ email: emailTmp });
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5009/get-list-student",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      var email = $("#emailPH").val();
+      var phone_num = $("#sdtPH").val();
+      var first_name = $("#hoPH").val();
+      var last_name = $("#tenPH").val();
+      var address = $("#diachiPH").val();
+      var password = $("#mk1PH").val();
+      var listStudent = res;
+      console.log(listStudent)
+      var tmp = {
+        email: email,
+        phone_num: phone_num,
+        first_name: first_name,
+        last_name: last_name,
+        address: address,
+        password: password,
+        list_student: listStudent,
+      };
+      var data = JSON.stringify(tmp);
+      console.log(data);
+      $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:5000/register-parent",
+        data: data,
+        dataType: "json",
+        contentType: "application/json",
+        success: function async(res) {
+          console.log(res);
+        },
+      });
+    },
+  });
+
+  console.log(layDanhSachCon());
+};
 $("#laymaxacnhan").click(laymaXn);
-$(".btnXacnhan").click(xacnhanma,loadinfoparen);
+$(".btnXacnhan").click(xacnhanma);
 // $("#taomoi").click();
+$("#taomoi").click(taoMoiTaikhoan);

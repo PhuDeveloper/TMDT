@@ -1,15 +1,21 @@
-.themTaiXe {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .pattern {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#quanLyTaiXe {
+  h3 {
+    //  padding-top: 20px;
+    text-align: center;
+    padding: 20px 0px;
+  }
+  .clsModal1 {
+    #modalx {
+      margin-left: 700px;
+    }
+  }
+  .clsTable {
+    .danhSachNhanVien {
+    }
   }
 }
-.phanTuyen {
+#phanTuyenBus {
+  display: none;
   .select {
     display: flex;
     justify-content: space-around;
@@ -22,4 +28,71 @@
   .bangPhanTuyen {
     padding-top: 30px;
   }
+}
+#doiThongTinMatKhau {
+  display: none;
+  h3 {
+    text-align: center;
+    padding: 30px 0;
+  }
+  .formDoiMatKhau {
+    width: 400px;
+    transform: translateX(65%);
+    padding-top: 70px;
+    #btnAdDoiMatkhau {
+      margin: 20px 135px;
+    }
+  }
+}
+#quanLyCaLamViec {
+  display: none;
+  .selectPhanCa {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0px;
+    .ngayPhanCa {
+      input {
+        height: 100%;
+      }
+    }
+  }
+}
+td {
+  text-align: center;
+}
+th {
+  text-align: center;
+}
+#doiThongTinCaNhan {
+  display: none;
+  height: 650px;
+  h3 {
+    text-align: center;
+    padding: 30px 0;
+  }
+  .formCapNhatThongTin {
+    width: 400px;
+    transform: translateX(65%);
+
+    #btnAdCapNhatThongTin {
+      margin: 20px 135px;
+    }
+  }
+}
+#font {
+  margin-right: 25px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.menux {
+  position: absolute;
+  display: none;
+  top: 50px;
+  z-index: 9;
+  background-color: #212529;
+  .liMenux {
+    
+   padding: 10px;
+   }
 }

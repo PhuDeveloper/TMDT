@@ -7,14 +7,14 @@ body {
     fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position-y: -180px;
+  background-position-y: -150px;
 }
 .header {
   background-color: rgb(27, 27, 27);
   opacity: 0.6;
-
+position: relative;
   width: 100%;
-  z-index: 2;
+  z-index: 9;
   .headerx {
     display: flex;
     height: 70px;

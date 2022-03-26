@@ -18,6 +18,7 @@
         href="https://file.hstatic.net/1000026716/file/favicon_0db2583fad1443e482491c7db08765e6.png" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/taixe.css" />
     <title>Tài xế</title>
 </head>
 
@@ -32,9 +33,15 @@
                 </div>
                 <div class="listMenu">
                     <ul class="listMenu-ul">
-                        <li class="menu"><a href="#">Tài xế</a></li>
+                        <li class="menu taiXeClick"><a id="tenTaiXe" href="#">Tài xế</a>
+                            <div class="menux ">
+                                <div class="liMenux thongTinCaNhan"><a href="#">Thông tin cá
+                                        nhân</a></div>
+                                <div class="liMenux doiMatKhau "><a href="#">Đổi mật khẩu</a></div>
+                            </div>
+                        </li>
                         <li class="menu"><a href="#"></a></li>
-                        <li class="menu"><a href="dangNhap.html">Đăng xuất </a></li>
+                        <li class="menu"><a href="dangnhapnhanvien.html">Đăng xuất </a></li>
                     </ul>
                 </div>
             </div>
@@ -45,22 +52,76 @@
             <div class="container">
 
                 <div class="listOption">
-                    <div class="liList" id="lichLV"><a href="#">Lịch làm việc</a></div>
-                    <div class="liList" id="thongtinTX"><a href="#">Thông tin cá nhân</a></div>
-                    <div class="liList "><a href="#">Test</a></div>
+                    <div class="liList lichLamViec"><a href="#">Lịch làm việc</a></div>
+
                 </div>
 
             </div>
         </div>
         <div class="right">
-            <div class="rightx lichlamviec">
-                Lịch làm việc
-               
+            <div id="lichlamviec" class="rightx ">
+                Lịch làm việc đ
             </div>
-            <div class="rightx thongtintaixe">
-                Cập nhật thông tin cá nhân
+            <div id="thongTinCaNhan" class="rightx ">
+                <h3>Cập nhật thông tin cá nhân</h3>
+                <div class="formCapNhatThongTin">
+                    <div class="form-floating mb-3">
+                        <input disabled type="text" class="form-control"
+                            id="idStaff">
+                        <label for="floatingInput">Tên đăng nhập</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="firstName">
+                        <label for="floatingInput">Họ</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lastName">
+                        <label for="floatingInput">Tên</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="addressx">
+                        <label for="floatingInput">Địa chỉ</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="phoneNum">
+                        <label for="floatingInput">Số đt</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="driverLicense">
+                        <label for="floatingInput">Mã bằng lái</label>
+                    </div>
+                    <button id="btnTxCapNhatThongTin" type="button" class="btn btn-primary">Cập
+                        nhật</button>
+                </div>
             </div>
-            
+            <div id="doiMatKhau" class="rightx ">
+                <h3>Đổi mật khẩu</h3>
+                <div class="formDoiMatKhau">
+                    <div class="input-group mb-3">
+
+                        <input disabled id="accountt" type="text" class="form-control"
+                            placeholder="Tên đăng nhập" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="old_password" type="password" class="form-control"
+                            placeholder="Nhập mật khẩu cũ" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="new_password" type="password" class="form-control"
+                            placeholder="Nhập mật khẩu mới" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input id="new_password1" type="password" class="form-control"
+                            placeholder="Nhập lại mật khẩu mới" aria-describedby="basic-addon1">
+                    </div>
+                    <button id="btnTaiXeDoiMatkhau" type="button" class="btn btn-primary">Đổi mật
+                        khẩu</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -70,6 +131,8 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="js/app.js"></script>
+
+
     <script src="js/taixe.js"></script>
 </body>
 
