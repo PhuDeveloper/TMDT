@@ -13,6 +13,8 @@ $(document).ready(function () {
     $("#dongHocPhi").hide();
     $("#doiMatKhau").hide();
     $("#doiThongTinCaNhan").hide();
+    $("#danhSachDangKi").hide();
+    $("#xemNgayVangHoc").hide();
   });
   $(".dongHocPhi").click(function async(e) {
     $("#thongtinphuhuynh").hide();
@@ -20,6 +22,8 @@ $(document).ready(function () {
     $("#dongHocPhi").show();
     $("#doiMatKhau").hide();
     $("#doiThongTinCaNhan").hide();
+    $("#danhSachDangKi").hide();
+    $("#xemNgayVangHoc").hide();
   });
   $(".doiThongTinCaNhan").click(function async(e) {
     loadThongTinPhuHuynh();
@@ -28,6 +32,8 @@ $(document).ready(function () {
     $("#dongHocPhi").hide();
     $("#doiMatKhau").hide();
     $("#doiThongTinCaNhan").show();
+    $("#danhSachDangKi").hide();
+    $("#xemNgayVangHoc").hide();
   });
   $(".doiMatKhau").click(function async(e) {
     $("#thongtinphuhuynh").hide();
@@ -35,17 +41,26 @@ $(document).ready(function () {
     $("#dongHocPhi").hide();
     $("#doiMatKhau").show();
     $("#doiThongTinCaNhan").hide();
+    $("#danhSachDangKi").hide();
+    $("#xemNgayVangHoc").hide();
   });
-
-  $(".thongTinCon").click(function async(e) {});
+  $(".danhSachDangKi").click(function async(e) {
+    loadDanhSachDangKi();
+    $("#thongtinphuhuynh").hide();
+    $("#dangKiDiemDon").hide();
+    $("#dongHocPhi").hide();
+    $("#doiMatKhau").hide();
+    $("#doiThongTinCaNhan").hide();
+    $("#danhSachDangKi").show();
+    $("#xemNgayVangHoc").hide();
+  });
 
   setTimeout(loadHocKi, 1000);
   setTimeout(loadDanhSachCon, 2000);
 });
 var idPhuHuynh = localStorage.getItem("idPhuHuynh");
 var date = new Date();
-var thang = date.getMonth() + 1;
-var nam = date.getFullYear();
+
 var arr = [];
 const soDuongNhoNhat = (arr) => {
   for (var i = 0; i < arr.length; i++) {
@@ -94,7 +109,7 @@ const loadDanhSachCon = () => {
         mHSTmp = item.id_student;
         tHSTmp = item.first_name + " " + item.last_name;
         let tr = '<tr maHocSinh="' + item.id_student + '">';
-        // tr += "<td>" + item.id_staff + "</td>";
+
         tr += "<td>" + item.id_student + "</td>";
         tr += "<td>" + item.first_name + "</td>";
         tr += "<td>" + item.last_name + "</td>";
@@ -178,8 +193,7 @@ var giaDangKi;
 $("#submitTram").click(function async(e) {
   var idTram = $("#id_station").find(":selected").val();
   var idSemester = id_semester;
-  console.log(idSemester);
-  console.log(idTram);
+
   var idStudent = $(".maHocSinhConDangKi").text();
 
   console.log(idStudent);
@@ -276,4 +290,129 @@ const capNhatThongTinPhuHuynh = () => {
     },
   });
 };
+
+var tenHsTmp;
 $("#btnPHCapNhatThongTin").click(capNhatThongTinPhuHuynh);
+const loadDanhSachDangKi = () => {
+  var idPhuHuynh = localStorage.getItem("idPhuHuynh");
+  var idSemester = id_semester;
+  var tmp = { id_parent: idPhuHuynh, id_semester: idSemester };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get-list-register-station-by-semester-by-parent",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      $(".DSDKTram").empty();
+      $.each(res, function (index, item) {
+        tenHsTmp = item.first_name + " " + item.last_name;
+        let tr =
+          '<tr id="hov" name="xemNgayVangHoc" idHuyDk="' +
+          item.id_register +
+          '">';
+
+        tr += "<td>" + item.id_student + "</td>";
+        tr += "<td>" + item.first_name + "</td>";
+        tr += "<td>" + item.last_name + "</td>";
+        tr += "<td>" + item.name_station + "</td>";
+        tr += "<td>" + Math.floor(item.price) + "</td>";
+
+        tr += "<td>";
+        tr +=
+          '<button style="border: none;" name="huyDangKiDiemDon" data-bs-toggle="modal" data-bs-target="#exampleModal11" class="fa-solid fa-trash"></button>';
+
+        tr += "</tr>";
+
+        $(".DSDKTram").append(tr);
+      });
+    },
+  });
+};
+var idRegister11;
+$(document).on("click", "button[name='huyDangKiDiemDon']", function () {
+  idRegister11 = $(this).closest("tr").attr("idHuyDk");
+});
+$("#huyDangKiDiemDon").click(function (e) {
+  var tmp = { id_register: idRegister11 };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/cancel-register-station",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      if (res.info == "Hủy đăng kí thất bại") {
+        alert(res.info);
+      } else {
+        alert(res.info);
+        loadDanhSachDangKi();
+      }
+    },
+  });
+});
+var idRegister111;
+$(document).on("dblclick", "tr[name='xemNgayVangHoc']", function () {
+  idRegister111 = $(this).closest("tr").attr("idHuyDk");
+
+  console.log(tenHsTmp);
+  $("#tenConVangHoc").text(tenHsTmp);
+  $("#thongtinphuhuynh").hide();
+  $("#dangKiDiemDon").hide();
+  $("#dongHocPhi").hide();
+  $("#doiMatKhau").hide();
+  $("#doiThongTinCaNhan").hide();
+  $("#danhSachDangKi").hide();
+  $("#xemNgayVangHoc").show();
+});
+$("#btnXemNgayVang").click(function (e) {
+  var from_date = $("#from_date").val();
+  var to_date = $("#to_date").val();
+  var tmp = {
+    from_date: from_date,
+    to_date: to_date,
+    id_register: 2,
+  };
+  var data = JSON.stringify(tmp);
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/statistic-student-go-school-bus",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      var resDt = res.map((val, idx) => {
+        if(val.bus_plate==null){
+          val.bus_plate="vắng"
+          
+        }
+        if(val.time_pick_up==null){
+          val.time_pick_up="vắng"
+        }
+        if(val.reason==null){
+          val.reason=" "
+        }
+      });
+
+     
+      $(".DSV").empty();
+      $.each(res, function (index, item) {
+        let tr = '<tr  idHuyDk="' + item.id_bus + '">';
+
+        tr += "<td>" + item.bus_plate + "</td>";
+        tr += "<td>" + item.date + "</td>";
+        tr += "<td>" + item.time_pick_up + "</td>";
+        tr += "<td>" + item.reason + "</td>";
+
+        tr += "<td>";
+
+        tr += "</tr>";
+
+        $(".DSV").append(tr);
+      });
+    },
+  });
+});

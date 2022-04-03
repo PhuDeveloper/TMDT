@@ -35,9 +35,11 @@
                     <ul class="listMenu-ul">
                         <li class="menu adminClick"><a href="#">Admin</a>
                             <div class="menux">
-                                <div class=" liMenux doiThongTinMatKhau"><a href="#">Đổi mật khẩu</a>
+                                <div class=" liMenux doiThongTinMatKhau"><a href="#">Đổi mật
+                                        khẩu</a>
                                 </div>
-                                <div class=" liMenux doiThongTinCaNhan"><a href="#">Đổi thông tin cá
+                                <div class=" liMenux doiThongTinCaNhan"><a href="#">Đổi thông tin
+                                        cá
                                         nhân</a>
                                 </div>
                             </div>
@@ -56,9 +58,10 @@
                 <div class="listOption">
                     <div class="liList quanLyTaiXe"><a href="#">Quản lý nhân viên</a></div>
                     <div class="liList phanTuyenBus"><a href="#">Phân tuyến Bus</a></div>
-                    <div class="liList quanLyCaLamViec"><a href="#">Quản lý ca làm việc</a>
+                    <div class="liList quanLyCaLamViec"><a href="#">Phân ca làm việc</a>
                     </div>
-
+                    <div class="liList quanLyBaoVang"><a href="#">Quản lý báo vắng</a>
+                    </div>
                 </div>
 
             </div>
@@ -272,24 +275,25 @@
 
                 <div class="selectPhanCa">
                     <div class="ngayPhanCa">
-                        
+
                         <input type="date" name="" id="ngayLamViec">
                     </div>
                     <div class="taiXePhanCa">
-                        
-                        <select id="id_staff" class="form-select" aria-label="Default select example">
+
+                        <select id="id_staff" class="form-select"
+                            aria-label="Default select example">
                             <option selected>Chọn tài xế</option>
-                           
+
                         </select>
                     </div>
                     <div class="xeBusPhanCa">
-                      
+
                         <select id="id_bus" class="form-select" aria-label="Default select example">
                             <option selected>Chọn bus</option>
-                           
+
                         </select>
                     </div>
-                   
+
                     <div class="btn-group" role="group" aria-label="Basic example">
 
                         <button id="btnPhanCa" type="button" class="btn btn-primary">Submid</button>
@@ -306,7 +310,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="quanLyBaoVang" class="rightx ">
+                <h3 class="dsv">Danh sách tài xế xin vắng ca</h3>
+                <div class="danhSachVang">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                               
+                                <th scope="col">Tài xế</th>
+                                <th scope="col">Bus</th>
+                                <th scope="col">Ngày làm</th>
+                                <th scope="col">Ca làm</th>
+                                <th scope="col">Xác nhận</th>
+                            </tr>
+                        </thead>
+                        <tbody class="DSTXBV">
+
                         </tbody>
                     </table>
                 </div>
@@ -342,8 +366,7 @@
                 <h3>Cập nhật thông tin cá nhân</h3>
                 <div class="formCapNhatThongTin">
                     <div class="form-floating mb-3">
-                        <input disabled type="text" class="form-control"
-                            id="idStaff">
+                        <input disabled type="text" class="form-control" id="idStaff">
                         <label for="floatingInput">Tên đăng nhập</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -358,7 +381,7 @@
                         <input type="text" class="form-control" id="addressx">
                         <label for="floatingInput">Địa chỉ</label>
                     </div>
-                    
+
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="phoneNum">
                         <label for="floatingInput">Số đt</label>

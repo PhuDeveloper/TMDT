@@ -54,9 +54,10 @@
             <div class="container">
                 <div class="listOption">
                     <div class="liList dangKiDiemDon"><a href="#">Đăng kí điểm đón</a></div>
+                    <div class="liList danhSachDangKi"><a href="#">Quản lý điểm đón</a></div>
+
                     <div class="liList dongHocPhi"><a href="#">Đóng học phí </a></div>
 
-                    <!-- <div class="liList"><a href="#">Test</a></div> -->
                 </div>
 
             </div>
@@ -90,6 +91,93 @@
                             </tr>
                         </thead>
                         <tbody class="DSC">
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div id="danhSachDangKi" class="rightx ">
+                <h3 style="text-align: center;padding: 20px 0px;">Quản lý điểm đón</h3>
+                <div class="dSachDangKi">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+
+
+                                <th scope="col">Mã học sinh</th>
+                                <th scope="col">Họ</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Tên trạm</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Hủy đăng kí</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody class="DSDKTram">
+
+
+
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="exampleModal11" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có chắc muốn hủy đăng kí?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Thoát</button>
+                                    <button type="button" id="huyDangKiDiemDon"
+                                        data-bs-dismiss="modal" class="btn btn-primary">Hủy đăng
+                                        kí</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div id="xemNgayVangHoc" class="rightx ">
+                <h3 id="tenConVangHoc" style="text-align: center; padding: 10px 0px;">Nguyễn Văn A
+                </h3>
+                <div class="inputDate">
+                    <div class="from">
+                        <label for="">Từ</label>
+                        <input type="date" name="" id="from_date">
+                    </div>
+                    <div class="to">
+                        <label for="">Đến</label>
+                        <input type="date" name="" id="to_date">
+                    </div>
+                    <button id="btnXemNgayVang" type="button" class="btn btn-primary">Xem</button>
+                </div>
+                <div class="danhSachVang">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+
+
+                                <th scope="col">Xe bus</th>
+                                <th scope="col">Ngày</th>
+                                <th scope="col">Thời gian lên xe</th>
+                                <th scope="col">Lý do vắng</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="DSV">
 
 
 
@@ -203,7 +291,7 @@
                         <input type="text" class="form-control" id="phoneNum">
                         <label for="floatingInput">Số đt</label>
                     </div>
-                    
+
                     <button id="btnPHCapNhatThongTin" type="button" class="btn btn-primary">Cập
                         nhật</button>
                 </div>

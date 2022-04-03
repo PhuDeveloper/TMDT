@@ -1,9 +1,10 @@
 $(document).ready(function () {
-  nhanDanhSachXeBusTheoNgay();
+  setTimeout(nhanDanhSachXeBusTheoNgay, 1500);
   $(".adminClick").click(function () {
     $(".menux").slideToggle("slow");
   });
-  loadDanhSachTaiXe();
+  setTimeout(loadHocKiAd, 1000);
+  setTimeout(loadDanhSachTaiXe, 2500);
   $("#accountt").val(localStorage.getItem("accountx"));
   $(".quanLyTaiXe").click(function async(e) {
     $("#quanLyTaiXe").show();
@@ -11,6 +12,7 @@ $(document).ready(function () {
     $("#quanLyCaLamViec").hide();
     $("#doiThongTinMatKhau").hide();
     $("#doiThongTinCaNhan").hide();
+    $("#quanLyBaoVang").hide();
   });
   $(".phanTuyenBus").click(function async(e) {
     $("#quanLyTaiXe").hide();
@@ -18,6 +20,7 @@ $(document).ready(function () {
     $("#quanLyCaLamViec").hide();
     $("#doiThongTinMatKhau").hide();
     $("#doiThongTinCaNhan").hide();
+    $("#quanLyBaoVang").hide();
   });
   $(".quanLyCaLamViec").click(function async(e) {
     $("#quanLyTaiXe").hide();
@@ -25,6 +28,16 @@ $(document).ready(function () {
     $("#quanLyCaLamViec").show();
     $("#doiThongTinMatKhau").hide();
     $("#doiThongTinCaNhan").hide();
+    $("#quanLyBaoVang").hide();
+  });
+  $(".quanLyBaoVang").click(function async(e) {
+    danhSachTaiXeBaoVang();
+    $("#quanLyTaiXe").hide();
+    $("#phanTuyenBus").hide();
+    $("#quanLyBaoVang").show();
+    $("#doiThongTinMatKhau").hide();
+    $("#doiThongTinCaNhan").hide();
+    $("#quanLyCaLamViec").hide();
   });
   $(".doiThongTinMatKhau").click(function async(e) {
     $("#quanLyTaiXe").hide();
@@ -32,6 +45,7 @@ $(document).ready(function () {
     $("#quanLyCaLamViec").hide();
     $("#doiThongTinMatKhau").show();
     $("#doiThongTinCaNhan").hide();
+    $("#quanLyBaoVang").hide();
   });
   $(".doiThongTinCaNhan").click(function async(e) {
     loadThongTinAd();
@@ -40,8 +54,39 @@ $(document).ready(function () {
     $("#quanLyCaLamViec").hide();
     $("#doiThongTinMatKhau").hide();
     $("#doiThongTinCaNhan").show();
+    $("#quanLyBaoVang").hide();
   });
 });
+var date = new Date();
+
+var arr = [];
+const soDuongNhoNhatAd = (arr) => {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] > 0) {
+      return i;
+    }
+  }
+};
+var a;
+var id_semester;
+const loadHocKiAd = () => {
+  $.ajax({
+    type: "GET",
+    url: "http://127.0.0.1:5000/get-list-semester",
+    success: function (res) {
+      a = res.map((value, index) => {
+        var toDate = new Date(value.to_date);
+        var timeTmp = toDate.getTime() - date.getTime();
+        return timeTmp;
+      });
+      id_semester = soDuongNhoNhatAd(a) + 1;
+      localStorage.setItem("idHKAd", id_semester);
+
+      $(".thongTinNamHoc").find(".hocKi").text(res[id_semester].semester);
+      $(".thongTinNamHoc").find(".namHoc").text(res[id_semester].school_year);
+    },
+  });
+};
 $("#btnThemTaiXe").click(function async(e) {
   var account = $("#account").val();
   var firstName = $("#first_name").val();
@@ -101,7 +146,7 @@ const loadDanhSachTaiXe = async () => {
       $.each(res, function (index, item) {
         if (item.id_role == 1) {
           let tr = '<tr idTaiXe="' + item.id_staff + '">';
-          // tr += "<td>" + item.id_staff + "</td>";
+         
           tr += "<td>" + item.account + "</td>";
           tr += "<td>" + item.first_name + "</td>";
           tr += "<td>" + item.last_name + "</td>";
@@ -182,7 +227,9 @@ const doiMatKhauAd = async () => {
   }
 };
 $("#btnAdDoiMatkhau").click(doiMatKhauAd);
-const nhanDanhSachTaiXeTrongLichLam = (date) => {
+const nhanDanhSachTaiXeTrongLichLam = () => {
+  var date = $("#ngayLamViec").val();
+
   var tmp = { date: date };
   var data = JSON.stringify(tmp);
   $.ajax({
@@ -192,6 +239,7 @@ const nhanDanhSachTaiXeTrongLichLam = (date) => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
+      console.log(res);
       var html = res.map((value, index) => {
         return `
        <option value=${value.id_staff}>${value.first_name} ${value.last_name}</option>
@@ -201,11 +249,14 @@ const nhanDanhSachTaiXeTrongLichLam = (date) => {
     },
   });
 };
-const nhanDanhSachXeBusTheoNgay = (date) => {
-  var id_semester = localStorage.getItem("idHK");
+const nhanDanhSachXeBusTheoNgay = () => {
+  var id_semester = localStorage.getItem("idHKAd");
+  var date = $("#ngayLamViec").val();
+
+  console.log(id_semester);
   var tmp = { id_semester: id_semester, date: date };
   var data = JSON.stringify(tmp);
-  
+
   $.ajax({
     type: "POST",
     url: "http://127.0.0.1:5000/get-list-unassigned-bus-in-semester-by-date",
@@ -213,6 +264,7 @@ const nhanDanhSachXeBusTheoNgay = (date) => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
+      console.log(res);
       var html = res.map((value, index) => {
         return `
        <option value=${value.id_bus}>${value.bus_plate}</option>
@@ -224,15 +276,15 @@ const nhanDanhSachXeBusTheoNgay = (date) => {
 };
 $("#ngayLamViec").change(function (e) {
   var date = $("#ngayLamViec").val();
- 
-  setTimeout(nhanDanhSachTaiXeTrongLichLam(date), 1000);
-  setTimeout(nhanDanhSachXeBusTheoNgay(date), 500);
+
+  setTimeout(nhanDanhSachTaiXeTrongLichLam, 2500);
+  setTimeout(nhanDanhSachXeBusTheoNgay, 2000);
 });
 const loadThongTinAd = () => {
   var idAd = localStorage.getItem("id_staff");
   var tmp = { id_staff: idAd };
   var data = JSON.stringify(tmp);
-  
+
   $.ajax({
     type: "POST",
     url: "http://127.0.0.1:5000/get-staff-info-by-id",
@@ -283,7 +335,7 @@ $("#btnPhanCa").click(function () {
   var idBus = $("#id_bus").find(":selected").val();
   var date = $("#ngayLamViec").val();
   var tmp = { id_bus: idBus, id_staff: idStaff, date_work: date };
-  var data=JSON.stringify(tmp)
+  var data = JSON.stringify(tmp);
   $.ajax({
     type: "POST",
     url: "http://127.0.0.1:5000/insert-drive-schedule",
@@ -291,7 +343,37 @@ $("#btnPhanCa").click(function () {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      console.log(res)
+      alert(res.info);
     },
   });
+});
+// var idBus;
+const danhSachTaiXeBaoVang = () => {
+  $.ajax({
+    type: "GET",
+    url: "http://127.0.0.1:5000/get_list_new_absent_staff",
+
+    success: function (res) {
+      $(".DSTXBV").empty();
+      $.each(res, function (index, item) {
+        let tr = '<tr idSchedule="' + item.id_schedule + '">';
+        
+
+        tr += "<td>" + item.first_name + " " + item.last_name + "</td>";
+        tr += "<td>" + item.bus_plate + "</td>";
+        tr += "<td>" + item.date_work + "</td>";
+        tr += "<td>" + item.shift + "</td>";
+        tr += "<td>";
+        tr += '<i name="xacNhanBaoVang" class=" XNBV fa-solid fa-check"></i>';
+
+        tr += "</tr>";
+        $(".DSTXBV").append(tr);
+      });
+    },
+  });
+};
+$(document).on("click", "i[name='xacNhanBaoVang']", function () {
+  var idSchedule = $(this).closest("tr").attr("idSchedule");
+  
+  console.log(idSchedule);
 });

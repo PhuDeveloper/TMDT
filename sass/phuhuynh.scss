@@ -64,7 +64,6 @@ td {
 }
 article {
   margin-top: -100px;
- 
 }
 #doiMatKhau {
   display: none;
@@ -89,9 +88,8 @@ article {
   z-index: 9;
   background-color: #212529;
   .liMenux {
-    
-   padding: 10px;
-   }
+    padding: 10px;
+  }
 }
 #doiThongTinCaNhan {
   display: none;
@@ -108,4 +106,23 @@ article {
       margin: 20px 135px;
     }
   }
+}
+#danhSachDangKi{
+display: none;
+  .dSachDangKi {
+  
+  }
+}
+#xemNgayVangHoc{
+  display: none;
+}
+#hov{
+  &:hover{
+    cursor: pointer;
+  }
+}
+.inputDate{
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-around;
 }

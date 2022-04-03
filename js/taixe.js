@@ -1,10 +1,11 @@
 $(document).ready(function () {
-  $(".taiXeClick").click(function(){
+  $(".taiXeClick").click(function () {
     $(".menux").slideToggle("slow");
-  })
+  });
   $("#tenTaiXe").text(localStorage.getItem("tentaixe"));
   $("#accountt").val(localStorage.getItem("account"));
-  loadLichLamCuaTaiXe();
+
+  danhSachLichLamTaiXe();
 });
 $(".lichLamViec").click(function (e) {
   $("#lichlamviec").show();
@@ -12,7 +13,7 @@ $(".lichLamViec").click(function (e) {
   $("#doiMatKhau").hide();
 });
 $(".thongTinCaNhan").click(function (e) {
-  loadThongTinTaiXe()
+  loadThongTinTaiXe();
   $("#lichlamviec").hide();
   $("#thongTinCaNhan").show();
   $("#doiMatKhau").hide();
@@ -22,7 +23,7 @@ $(".doiMatKhau").click(function (e) {
   $("#thongTinCaNhan").hide();
   $("#doiMatKhau").show();
 });
-const doiMatKhauNv = async() => {
+const doiMatKhauNv = async () => {
   if ($("#new_password").val() == $("#new_password1").val()) {
     var account = localStorage.getItem("account");
 
@@ -44,13 +45,11 @@ const doiMatKhauNv = async() => {
       contentType: "application/json",
       success: function (res) {
         if (res.result == true) {
-          
           $("#old_password").val("");
           $("#new_password").val("");
           $("#new_password1").val("");
           alert(res.info);
         } else {
-          
           $("#old_password").val("");
           $("#new_password").val("");
           $("#new_password1").val("");
@@ -77,7 +76,7 @@ const loadThongTinTaiXe = () => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      console.log(res)
+      console.log(res);
       $("#idStaff").val(res[0].account);
       $("#firstName").val(res[0].first_name);
       $("#lastName").val(res[0].last_name);
@@ -110,22 +109,20 @@ const capNhatThongTinTaiXe = () => {
     dataType: "json",
     contentType: "application/json",
     success: function async(res) {
-      if(res.result==true){
+      if (res.result == true) {
         alert("Đổi thông tin thành công!!");
-
-      }
-      else{
+      } else {
         alert("Đổi thông tin thất bại!!");
-
       }
     },
   });
 };
-$("#btnTxCapNhatThongTin").click(capNhatThongTinTaiXe)
-const loadLichLamCuaTaiXe=()=>{
-  var idTX = localStorage.getItem("id_staff");
-  var tmp={id_staff:idTX}
-  var data=JSON.stringify(tmp)
+$("#btnTxCapNhatThongTin").click(capNhatThongTinTaiXe);
+
+const danhSachLichLamTaiXe = () => {
+  var id_staff = localStorage.getItem("id_staff");
+  var tmp = { id_staff: id_staff };
+  var data = JSON.stringify(tmp);
   $.ajax({
     type: "POST",
     url: "http://127.0.0.1:5000/get_list_work_date_by_driver",
@@ -133,8 +130,61 @@ const loadLichLamCuaTaiXe=()=>{
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      console.log(res)
-      
+      console.log(res);
+      $(".LLV").empty();
+      $.each(res, function (index, item) {
+        id_schedule = item.id_schedule;
+
+        let tr = '<tr id_schedule="' + item.id_schedule + '">';
+
+        tr += "<td>" + item.date_work + "</td>";
+        tr += "<td>" + item.bus_plate + "</td>";
+        tr += "<td>" + item.shift + "</td>";
+
+        tr += "<td>";
+        tr +=
+          '<i name="baoVang" class="hoverTx fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#modalBaoVang"></i>';
+
+        tr += "</tr>";
+        $(".LLV").append(tr);
+      });
     },
   });
-}
+};
+const loadlyDovang = () => {
+  $.ajax({
+    type: "GET",
+    url: "http://127.0.0.1:5000/get-list-reason-absence",
+    success: function (res) {
+      var html = res.map((value, index) => {
+        return `
+     <option value=${value.id_absent}>${value.reason}</option>
+     `;
+      });
+      document.getElementById("id_absent").innerHTML = html.join("");
+    },
+  });
+};
+var idVang;
+$(document).on("click", "i[name='baoVang']", function () {
+  loadlyDovang();
+  idVang = $(this).closest("tr").attr("id_schedule");
+});
+const baoVang = () => {
+  var id_absent = $("#id_absent").find(":selected").val();
+  var tmp = { id_absent: id_absent, id_schedule: idVang };
+  var data=JSON.stringify(tmp)
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/update_absent_schedule",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      alert(res.info)
+    },
+  });
+
+};
+$("#btnBaoVang").click(baoVang);
+  

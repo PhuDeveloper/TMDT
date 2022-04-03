@@ -96,3 +96,15 @@ th {
    padding: 10px;
    }
 }
+.dsv{
+  text-align: center;
+  padding: 20px 0;
+}
+#quanLyBaoVang{
+  display: none;
+}
+.XNBV{
+  &:hover{
+    cursor: pointer;
+  }
+}

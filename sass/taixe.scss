@@ -1,4 +1,5 @@
 #lichlamviec {
+  height: 800px;
 }
 #doiMatKhau {
   display: none;
@@ -47,4 +48,13 @@
       margin: 20px 135px;
     }
   }
+}
+.hoverTx{
+  &:hover{
+    cursor: pointer;
+  }
+}
+.lichTx{
+  text-align: center;
+  padding: 20px 0px;
 }
