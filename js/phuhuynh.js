@@ -392,10 +392,10 @@ $("#btnXemNgayVang").click(function (e) {
     success: function (res) {
       var resDt = res.map((val, idx) => {
         if (val.bus_plate == null) {
-          val.bus_plate = "vắng";
+          val.bus_plate = "--";
         }
         if (val.time_pick_up == null) {
-          val.time_pick_up = "vắng";
+          val.time_pick_up = "--";
         }
         if (val.reason == null) {
           val.reason = " ";

@@ -1,11 +1,12 @@
 $(document).ready(function () {
-  setTimeout(bieuDo,600)
+  setTimeout(bieuDo, 600);
   $(".adminClick").click(function () {
     $(".menux").slideToggle("slow");
   });
   setTimeout(loadHocKiAd, 1000);
   setTimeout(loadDanhSachTaiXe, 2500);
   getDanhSachTuyen();
+  setTimeout(getDanhSachPhanTuyenBus, 3000);
   setTimeout(getDanhSachBusHocKi, 1500);
   $("#accountt").val(localStorage.getItem("accountx"));
   $(".quanLyTaiXe").click(function async(e) {
@@ -410,7 +411,7 @@ const getDanhSachLichLamCacTaiXe = () => {
     },
   });
 };
-// var idBus;
+var ngayVang;
 const danhSachTaiXeBaoVang = () => {
   $.ajax({
     type: "GET",
@@ -419,6 +420,7 @@ const danhSachTaiXeBaoVang = () => {
     success: function (res) {
       $(".DSTXBV").empty();
       $.each(res, function (index, item) {
+        ngayVang = item.date_work;
         let tr = '<tr idSchedule="' + item.id_schedule + '">';
 
         tr += "<td>" + item.first_name + " " + item.last_name + "</td>";
@@ -426,7 +428,8 @@ const danhSachTaiXeBaoVang = () => {
         tr += "<td>" + item.date_work + "</td>";
         tr += "<td>" + item.shift + "</td>";
         tr += "<td>";
-        tr += '<i name="xacNhanBaoVang" class=" XNBV fa-solid fa-check"></i>';
+        tr +=
+          '<i name="xacNhanBaoVang" data-bs-toggle="modal" data-bs-target="#xacNhanBaoVang" class=" XNBV fa-solid fa-check"></i>';
 
         tr += "</tr>";
         $(".DSTXBV").append(tr);
@@ -434,12 +437,80 @@ const danhSachTaiXeBaoVang = () => {
     },
   });
 };
+const nhanDanhSachTaiXeTrongLichLam1 = (date) => {
+  var date = date;
+
+  var tmp = { date: date };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get_list_staff_empty_work_today",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log(res);
+      var html = res.map((value, index) => {
+        return `
+       <option value=${value.id_staff}>${value.first_name} ${value.last_name}</option>
+       `;
+      });
+      document.getElementById("id_staffss").innerHTML = html.join("");
+    },
+  });
+};
 $(document).on("click", "i[name='xacNhanBaoVang']", function () {
   var idSchedule = $(this).closest("tr").attr("idSchedule");
-
+  localStorage.setItem("idShhedulex", idSchedule);
   console.log(idSchedule);
-});
+  var tmp = { id_schedule: idSchedule };
+  var data = JSON.stringify(tmp);
 
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get-absent-staff-by-schedule",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log(res);
+      localStorage.setItem("dateWork", res[0].date_work);
+      localStorage.setItem("bus", res[0].id_bus);
+      // localStorage.setItem("dateWork",res.id_staff)
+      localStorage.setItem("shift", res[0].shift);
+
+      // date_work: '2022-04-04', id_bus: 1, id_staff: 2, shift: 'Chiều'
+    },
+  });
+  var date = localStorage.getItem("dateWork");
+  nhanDanhSachTaiXeTrongLichLam1(date);
+});
+$("#chapNhanBaoVang").click(function (e) {
+  var id_staff = $("#id_staffss").val();
+  var id_schedule = localStorage.getItem("idShhedulex");
+  var id_bus = localStorage.getItem("bus");
+  var shift = localStorage.getItem("shift");
+  var date_work = localStorage.getItem("dateWork");
+  var tmp = {
+    id_schedule: id_schedule,
+    id_staff: id_staff,
+    id_bus: id_bus,
+    shift: shift,
+    date_work: date_work,
+  };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/admin-accept-absent",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      alert(res.info);
+      danhSachTaiXeBaoVang();
+    },
+  });
+});
 const getDanhSachDiemDon = () => {
   $.ajax({
     type: "GET",
@@ -457,7 +528,8 @@ const getDanhSachDiemDon = () => {
 
         tr += "<td>";
 
-        tr += '<i name="suaTram" id="font" class="fa-solid fa-pen"></i>';
+        tr +=
+          '<i name="suaTram" data-bs-toggle="modal" data-bs-target="#suaTramzz" id="font" class="fa-solid fa-pen"></i>';
         tr += "</tr>";
         $(".DSDD").append(tr);
       });
@@ -481,6 +553,7 @@ const getDanhSachTuyen = () => {
     },
   });
 };
+
 const getDanhSachBusHocKi = () => {
   var id_semester = localStorage.getItem("idHKAd");
   var tmp = { id_semester: id_semester };
@@ -521,7 +594,8 @@ const themTuyen = () => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      console.log(res);
+      alert(res.info);
+      getDanhSachPhanTuyenBus();
     },
   });
 };
@@ -587,33 +661,87 @@ const bieuDo = () => {
       xValues = res.map((val) => {
         return val.name_route;
       });
-      
+
       yValues = res.map((val) => {
         return val.count_student;
       });
-      
+
       new Chart("myChart", {
         type: "bar",
         data: {
           labels: xValues,
-          datasets: [{
-            backgroundColor: barColors,
-            data: yValues
-          }]
+          datasets: [
+            {
+              backgroundColor: barColors,
+              data: yValues,
+            },
+          ],
         },
         options: {
-          legend: {display: false},
+          legend: { display: false },
           scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
-              }
-            }],
-          }
-        }
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
       });
-
-
     },
   });
 };
+const getDanhSachPhanTuyenBus = () => {
+  var id_semester = localStorage.getItem("idHKAd");
+  var tmp = { id_semester: id_semester };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get-list-bus-route-by-semester",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log(res);
+      $(".DSPTB").empty();
+      $.each(res, function (index, item) {
+        let tr = '<tr id_station="' + item.id_station + '">';
+
+        tr += "<td>" + index + "</td>";
+        tr += "<td>" + item.name_route + "</td>";
+        tr += "<td>" + item.bus_plate + "</td>";
+
+        tr += "<td>";
+
+        tr += "</tr>";
+        $(".DSPTB").append(tr);
+      });
+    },
+  });
+};
+$(document).on("click", "i[name='suaTram']", function (e) {
+  var id_station = $(this).closest("tr").attr("id_station");
+  var position = $("#positionUp").val();
+  var price = $("#priceUp").val();
+  var name_station = $("#name_stationUp").val();
+  var tmp = {
+    id_station: id_station,
+    price: price,
+    name_station: name_station,
+    position: position,
+  };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/update-station",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      alert(res.info);
+      getDanhSachDiemDon();
+    },
+  });
+});

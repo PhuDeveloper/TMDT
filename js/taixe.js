@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  setTimeout(layIdRoute, 1000);
+  setTimeout(layDanhSachHocSinhDeDiemDanh, 1500);
   $(".taiXeClick").click(function () {
     $(".menux").slideToggle("slow");
   });
@@ -140,7 +142,6 @@ const danhSachLichLamTaiXe = () => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      console.log(res);
       $(".LLV").empty();
       $.each(res, function (index, item) {
         id_schedule = item.id_schedule;
@@ -196,3 +197,85 @@ const baoVang = () => {
   });
 };
 $("#btnBaoVang").click(baoVang);
+
+const layIdRoute = () => {
+  var date = new Date();
+  var dd = date.getDate();
+  var mm = date.getMonth() + 1;
+  var yyyy = date.getFullYear();
+  if (dd < 10) dd = "0" + dd;
+  if (mm < 10) mm = "0" + mm;
+  var today = yyyy + "-" + mm + "-" + dd;
+
+  var id_semester = localStorage.getItem("idHKAd");
+  var idStaff = localStorage.getItem("id_staff");
+  var tmp = { id_semester: id_semester, id_staff: idStaff, date: today };
+  var data = JSON.stringify(tmp);
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get-info-bus-route-by-driver-in-date",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      localStorage.setItem("idRt", res[0].id_route);
+      localStorage.setItem("idBuss", res[0].id_bus);
+    },
+  });
+};
+const layDanhSachHocSinhDeDiemDanh = () => {
+  var id_route = localStorage.getItem("idRt");
+  var id_semester = localStorage.getItem("idHKAd");
+  var date = new Date();
+  var dd = date.getDate();
+  var mm = date.getMonth() + 1;
+  var yyyy = date.getFullYear();
+  if (dd < 10) dd = "0" + dd;
+  if (mm < 10) mm = "0" + mm;
+  var today = yyyy + "-" + mm + "-" + dd;
+  var tmp = { id_route: id_route, id_semester: id_semester, date: today };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get-list-attendance-student-by-route-in-date",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log(res);
+      $(".DSHSDD").empty();
+      $.each(res, function (index, item) {
+        id_schedule = item.id_schedule;
+
+        let tr = '<tr idRegister="' + item.id_register + '">';
+
+        tr += "<td>" + item.id_student + "</td>";
+        tr += "<td>" + item.first_name + "</td>";
+        tr += "<td>" + item.last_name + "</td>";
+
+        tr += "<td>";
+        tr += '<i name="diemDanh" class="hoverTx fa-solid fa-check"></i>';
+
+        tr += "</tr>";
+        $(".DSHSDD").append(tr);
+      });
+    },
+  });
+};
+$(document).on("click", "i[name='diemDanh']", function () {
+  var id_register = $(this).closest("tr").attr("idRegister");
+  var id_bus = localStorage.getItem("idBuss");
+  var tmp = { id_register: id_register, id_bus: id_bus };
+  var data=JSON.stringify(tmp)
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/insert-attendance-student",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+     alert(res.info)
+    },
+  });
+});

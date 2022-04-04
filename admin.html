@@ -13,7 +13,7 @@
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <link rel="icon" type="image/png" sizes="192x192"
         href="https://file.hstatic.net/1000026716/file/favicon_0db2583fad1443e482491c7db08765e6.png" />
     <link rel="stylesheet" href="css/reset.css" />
@@ -64,7 +64,7 @@
                     </div>
                     <div class="liList quanLyDiemDon"><a href="#">Quản lý điểm đón</a>
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -257,6 +257,38 @@
 
                         </tbody>
                     </table>
+                    <div class="modal fade" id="suaTramzz" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông tin trạm</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group mb-3 abc">
+
+                                    <input id="name_stationUp" type="text" class="form-control"
+                                        placeholder="Tên điểm đón" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3 abc">
+            
+                                    <input id="positionUp" type="text" class="form-control" placeholder="Địa chỉ"
+                                        aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3 abc">
+            
+                                    <input id="priceUp" type="text" class="form-control" placeholder="Giá"
+                                        aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Cập nhật</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                 </div>
             </div>
             <div id="phanTuyenBus" class="rightx ">
@@ -291,54 +323,8 @@
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Otto</td>
+                            <tbody class="DSPTB">
 
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <td>Otto</td>
-
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> <tr>
-                                    <td>Otto</td>
-
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> <tr>
-                                    <td>Otto</td>
-
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> <tr>
-                                    <td>Otto</td>
-
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> <tr>
-                                    <td>Otto</td>
-
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> <tr>
-                                    <td>Otto</td>
-
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> <tr>
-                                    <td>Otto</td>
-
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> <tr>
-                                    <td>Otto</td>
-
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -347,7 +333,7 @@
                     <canvas id="myChart" style="height: 550px; width:100%;max-width:600px"></canvas>
 
                     <h4 style="text-align: center;">Biểu đồ học sinh đăng kí điểm đón</h4>
-                    
+
                 </div>
             </div>
             <div id="quanLyCaLamViec" class="rightx ">
@@ -412,6 +398,33 @@
 
                         </tbody>
                     </table>
+                    <div class="modal fade" id="xacNhanBaoVang" data-bs-backdrop="static"
+                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Chọn tài xế
+                                        thay ca</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <select id="id_staffss" class="form-select">
+
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" data-bs-dismiss="modal"
+                                        id="chapNhanBaoVang" class="btn btn-primary">Chấp
+                                        nhận</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div id="doiThongTinMatKhau" class="rightx">
@@ -473,7 +486,7 @@
                         nhật</button>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
