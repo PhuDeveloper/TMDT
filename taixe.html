@@ -50,64 +50,86 @@
     <div class="content">
         <div class="navBar">
             <div class="container">
-
                 <div class="listOption">
                     <div class="liList lichLamViec"><a href="#">Lịch làm việc</a></div>
-
+                    <div class="liList diemDanh"><a href="#">Điểm danh</a></div>
                 </div>
-
             </div>
         </div>
         <div class="right">
             <div id="lichlamviec" class="rightx ">
-              <h3 class="lichTx">Lịch làm việc</h3>
-              <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <!-- <th scope="col">Id</th> -->
+                <h3 class="lichTx">Lịch làm việc</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">Id</th> -->
 
-                        <th scope="col">Ngày làm</th>
-                        <th scope="col">Bus</th>
-                        <th scope="col">Ca</th>
-                        <th scope="col">Báo vắng</th>
+                            <th scope="col">Ngày làm</th>
+                            <th scope="col">Bus</th>
+                            <th scope="col">Ca</th>
+                            <th scope="col">Báo vắng</th>
 
-                    </tr>
-                </thead>
-                <tbody class="LLV">
+                        </tr>
+                    </thead>
+                    <tbody class="LLV">
 
 
 
-                </tbody>
-            </table>
-           
-            <div class="modal fade" id="modalBaoVang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="staticBackdropLabel">Lý do vắng</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </tbody>
+                </table>
+
+                <div class="modal fade" id="modalBaoVang" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Lý do vắng</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <select id="id_absent" class="form-control">
+
+                                    <!-- <option class="tram" ></option> -->
+
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Đóng</button>
+                                <button type="button" id="btnBaoVang" data-bs-dismiss="modal"
+                                    class="btn btn-primary">Báo vắng</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <select id="id_absent" class="form-control">
-
-                            <!-- <option class="tram" ></option> -->
-
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                      <button type="button" id="btnBaoVang" class="btn btn-primary">Báo vắng</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
+            </div>
+            <div id="diemDanh" class="rightx ">
+                <h3>Điểm danh</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ngày làm</th>
+                            <th scope="col">Bus</th>
+                            <th scope="col">Ca</th>
+                            <th scope="col">Báo vắng</th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+
+
+
+                    </tbody>
+                </table>
+
+
             </div>
             <div id="thongTinCaNhan" class="rightx ">
                 <h3>Cập nhật thông tin cá nhân</h3>
                 <div class="formCapNhatThongTin">
                     <div class="form-floating mb-3">
-                        <input disabled type="text" class="form-control"
-                            id="idStaff">
+                        <input disabled type="text" class="form-control" id="idStaff">
                         <label for="floatingInput">Tên đăng nhập</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -122,7 +144,7 @@
                         <input type="text" class="form-control" id="addressx">
                         <label for="floatingInput">Địa chỉ</label>
                     </div>
-                    
+
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="phoneNum">
                         <label for="floatingInput">Số đt</label>

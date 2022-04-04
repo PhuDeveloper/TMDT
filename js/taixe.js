@@ -11,17 +11,27 @@ $(".lichLamViec").click(function (e) {
   $("#lichlamviec").show();
   $("#thongTinCaNhan").hide();
   $("#doiMatKhau").hide();
+  $("#diemDanh").hide();
+});
+$(".diemDanh").click(function (e) {
+  $("#lichlamviec").hide();
+  $("#thongTinCaNhan").hide();
+  $("#doiMatKhau").hide();
+  $("#diemDanh").show();
 });
 $(".thongTinCaNhan").click(function (e) {
   loadThongTinTaiXe();
   $("#lichlamviec").hide();
   $("#thongTinCaNhan").show();
   $("#doiMatKhau").hide();
+  $("#diemDanh").hide();
 });
 $(".doiMatKhau").click(function (e) {
   $("#lichlamviec").hide();
   $("#thongTinCaNhan").hide();
   $("#doiMatKhau").show();
+  $("#diemDanh").hide();
+  $("#diemDanh").hide();
 });
 const doiMatKhauNv = async () => {
   if ($("#new_password").val() == $("#new_password1").val()) {
@@ -173,7 +183,7 @@ $(document).on("click", "i[name='baoVang']", function () {
 const baoVang = () => {
   var id_absent = $("#id_absent").find(":selected").val();
   var tmp = { id_absent: id_absent, id_schedule: idVang };
-  var data=JSON.stringify(tmp)
+  var data = JSON.stringify(tmp);
   $.ajax({
     type: "POST",
     url: "http://127.0.0.1:5000/update_absent_schedule",
@@ -181,10 +191,8 @@ const baoVang = () => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      alert(res.info)
+      alert(res.info);
     },
   });
-
 };
 $("#btnBaoVang").click(baoVang);
-  

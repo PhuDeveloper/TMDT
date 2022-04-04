@@ -305,28 +305,34 @@ const loadDanhSachDangKi = () => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      $(".DSDKTram").empty();
-      $.each(res, function (index, item) {
-        tenHsTmp = item.first_name + " " + item.last_name;
-        let tr =
-          '<tr id="hov" name="xemNgayVangHoc" idHuyDk="' +
-          item.id_register +
-          '">';
+      console.log(res[0].is_cancelled)
+      
+        $(".DSDKTram").empty();
+        $.each(res, function (index, item) {
+          if(item.is_cancelled==false){
 
-        tr += "<td>" + item.id_student + "</td>";
-        tr += "<td>" + item.first_name + "</td>";
-        tr += "<td>" + item.last_name + "</td>";
-        tr += "<td>" + item.name_station + "</td>";
-        tr += "<td>" + Math.floor(item.price) + "</td>";
-
-        tr += "<td>";
-        tr +=
-          '<button style="border: none;" name="huyDangKiDiemDon" data-bs-toggle="modal" data-bs-target="#exampleModal11" class="fa-solid fa-trash"></button>';
-
-        tr += "</tr>";
-
-        $(".DSDKTram").append(tr);
-      });
+            tenHsTmp = item.first_name + " " + item.last_name;
+            let tr =
+              '<tr id="hov" name="xemNgayVangHoc" idHuyDk="' +
+              item.id_register +
+              '">';
+  
+            tr += "<td>" + item.id_student + "</td>";
+            tr += "<td>" + item.first_name + "</td>";
+            tr += "<td>" + item.last_name + "</td>";
+            tr += "<td>" + item.name_station + "</td>";
+            tr += "<td>" + Math.floor(item.price) + "</td>";
+  
+            tr += "<td>";
+            tr +=
+              '<button style="border: none;" name="huyDangKiDiemDon" data-bs-toggle="modal" data-bs-target="#exampleModal11" class="fa-solid fa-trash"></button>';
+  
+            tr += "</tr>";
+  
+            $(".DSDKTram").append(tr);
+          }
+        });
+      
     },
   });
 };
@@ -344,7 +350,7 @@ $("#huyDangKiDiemDon").click(function (e) {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      if (res.info == "Hủy đăng kí thất bại") {
+      if (res.info == "Hủy đăng kí thất bại" || res.info == "Có lỗi xảy ra") {
         alert(res.info);
       } else {
         alert(res.info);
@@ -385,19 +391,17 @@ $("#btnXemNgayVang").click(function (e) {
     contentType: "application/json",
     success: function (res) {
       var resDt = res.map((val, idx) => {
-        if(val.bus_plate==null){
-          val.bus_plate="vắng"
-          
+        if (val.bus_plate == null) {
+          val.bus_plate = "vắng";
         }
-        if(val.time_pick_up==null){
-          val.time_pick_up="vắng"
+        if (val.time_pick_up == null) {
+          val.time_pick_up = "vắng";
         }
-        if(val.reason==null){
-          val.reason=" "
+        if (val.reason == null) {
+          val.reason = " ";
         }
       });
 
-     
       $(".DSV").empty();
       $.each(res, function (index, item) {
         let tr = '<tr  idHuyDk="' + item.id_bus + '">';

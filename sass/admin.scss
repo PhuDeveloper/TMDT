@@ -108,3 +108,25 @@ th {
     cursor: pointer;
   }
 }
+#quanLyDiemDon{
+  width: 1000px;
+  height: 1000px;
+  display: none;
+  .themDiemDon{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    .abc{
+      width: 200px;
+      height: 38px;
+     
+    }
+  }
+}
+#btnAdThemDiemDon{
+  transform: translateY(-7px);
+}
+#thongKe{
+display: none;
+}
