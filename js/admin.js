@@ -1,9 +1,12 @@
 $(document).ready(function () {
+  setTimeout(bieuDo,600)
   $(".adminClick").click(function () {
     $(".menux").slideToggle("slow");
   });
   setTimeout(loadHocKiAd, 1000);
   setTimeout(loadDanhSachTaiXe, 2500);
+  getDanhSachTuyen();
+  setTimeout(getDanhSachBusHocKi, 1500);
   $("#accountt").val(localStorage.getItem("accountx"));
   $(".quanLyTaiXe").click(function async(e) {
     $("#quanLyTaiXe").show();
@@ -16,7 +19,8 @@ $(document).ready(function () {
     $("#thongKe").hide();
   });
   $(".phanTuyenBus").click(function async(e) {
-    nhanIdBusVaIdRoute();
+    getDanhSachTuyen();
+    setTimeout(getDanhSachBusHocKi, 1000);
     $("#quanLyTaiXe").hide();
     $("#phanTuyenBus").show();
     $("#quanLyCaLamViec").hide();
@@ -27,6 +31,7 @@ $(document).ready(function () {
     $("#thongKe").hide();
   });
   $(".quanLyCaLamViec").click(function async(e) {
+    getDanhSachLichLamCacTaiXe();
     $("#quanLyTaiXe").hide();
     $("#phanTuyenBus").hide();
     $("#quanLyCaLamViec").show();
@@ -70,6 +75,7 @@ $(document).ready(function () {
   });
   $(".quanLyDiemDon").click(function async(e) {
     getDanhSachDiemDon();
+    setTimeout(getDanhSachTuyen1, 500);
     $("#quanLyTaiXe").hide();
     $("#phanTuyenBus").hide();
     $("#quanLyCaLamViec").hide();
@@ -188,7 +194,7 @@ const loadDanhSachTaiXe = async () => {
           tr += "<td>";
           tr +=
             '<i name="xoaTaiXe" id="font" data-bs-toggle="modal"  data-bs-target="#exampleModalx" class="fa-solid fa-trash-can"></i>';
-          tr += '<i name="suaTaiXe" id="font" class="fa-solid fa-pen"></i>';
+
           tr += "</tr>";
           $(".danhSachNhanVien").append(tr);
         }
@@ -381,6 +387,29 @@ $("#btnPhanCa").click(function () {
     },
   });
 });
+const getDanhSachLichLamCacTaiXe = () => {
+  $.ajax({
+    type: "GET",
+    url: "http://127.0.0.1:5000/get-list-driver-work-date",
+
+    success: function (res) {
+      console.log(res);
+      $(".DSLLVCTX").empty();
+      $.each(res, function (index, item) {
+        let tr = '<tr idSchedule="' + item.id_schedule + '">';
+
+        tr += "<td>" + item.date_work + "</td>";
+        tr += "<td>" + item.bus_plate + "</td>";
+        tr += "<td>" + item.shift + "</td>";
+
+        tr += "<td>";
+
+        tr += "</tr>";
+        $(".DSLLVCTX").append(tr);
+      });
+    },
+  });
+};
 // var idBus;
 const danhSachTaiXeBaoVang = () => {
   $.ajax({
@@ -410,28 +439,7 @@ $(document).on("click", "i[name='xacNhanBaoVang']", function () {
 
   console.log(idSchedule);
 });
-const nhanIdBusVaIdRoute = () => {
-  var id_semester = localStorage.getItem("idHKAd");
-  var tmp = { id_semester: id_semester };
-  var data = JSON.stringify(tmp);
-  console.log(data);
-  $.ajax({
-    type: "POST",
-    url: "http://127.0.0.1:5000/get-list-bus-route-by-semester",
-    data: data,
-    dataType: "json",
-    contentType: "application/json",
-    success: function (res) {
-      console.log(res);
-      var html = res.map((value, index) => {
-        return `
-       <option value=${value.id_staff}>${value.first_name} ${value.last_name}</option>
-       `;
-      });
-      document.getElementById("id_staff").innerHTML = html.join("");
-    },
-  });
-};
+
 const getDanhSachDiemDon = () => {
   $.ajax({
     type: "GET",
@@ -456,4 +464,156 @@ const getDanhSachDiemDon = () => {
     },
   });
 };
-const getDanhSachTuyen = () => {};
+const getDanhSachTuyen = () => {
+  $.ajax({
+    type: "GET",
+    url: "http://127.0.0.1:5000/get-list-route",
+
+    success: function (res) {
+      console.log(res);
+
+      var html = res.map((value, index) => {
+        return `
+       <option value=${value.id_route}>${value.name_route}</option>
+       `;
+      });
+      document.getElementById("idRoute").innerHTML = html.join("");
+    },
+  });
+};
+const getDanhSachBusHocKi = () => {
+  var id_semester = localStorage.getItem("idHKAd");
+  var tmp = { id_semester: id_semester };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get-list-unassigned-bus-in-semester",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log(res);
+      var html = res.map((value, index) => {
+        return `
+       <option value=${value.id_bus}>${value.bus_plate}</option>
+       `;
+      });
+      document.getElementById("id_busx").innerHTML = html.join("");
+    },
+  });
+};
+const themTuyen = () => {
+  var id_bus = $("#id_busx").val();
+  var idRoute = $("#idRoute").val();
+  console.log(idRoute);
+  var id_semester = localStorage.getItem("idHKAd");
+  var tmp = {
+    id_bus: id_bus,
+    id_route: idRoute,
+    id_semester: id_semester,
+  };
+  var data = JSON.stringify(tmp);
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/insert-bus-route",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log(res);
+    },
+  });
+};
+$("#btnThemTuyen").click(themTuyen);
+const getDanhSachTuyen1 = () => {
+  $.ajax({
+    type: "GET",
+    url: "http://127.0.0.1:5000/get-list-route",
+
+    success: function (res) {
+      console.log(res);
+
+      var html = res.map((value, index) => {
+        return `
+       <option value=${value.id_route}>${value.name_route}</option>
+       `;
+      });
+      document.getElementById("id_routets").innerHTML = html.join("");
+    },
+  });
+};
+$("#btnAdThemDiemDon").click(function (e) {
+  var name_station = $("#name_station").val();
+  var position = $("#position").val();
+  var price = $("#price").val();
+  var idRoutea = $("#id_routets").val();
+  var tmp = {
+    name_station: name_station,
+    position: position,
+    price: price,
+    id_route: idRoutea,
+  };
+  var data = JSON.stringify(tmp);
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/insert-station",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      alert(res.info);
+
+      setTimeout(getDanhSachDiemDon, 500);
+    },
+  });
+});
+const bieuDo = () => {
+  var id_semester = localStorage.getItem("idHKAd");
+  var tmp = { id_semester: id_semester };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/count-student-by-route-in-semester",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log(res);
+      var xValues = [];
+      var yValues = [];
+      var barColors = ["red", "green", "blue", "orange", "brown"];
+      xValues = res.map((val) => {
+        return val.name_route;
+      });
+      
+      yValues = res.map((val) => {
+        return val.count_student;
+      });
+      
+      new Chart("myChart", {
+        type: "bar",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          legend: {display: false},
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }],
+          }
+        }
+      });
+
+
+    },
+  });
+};

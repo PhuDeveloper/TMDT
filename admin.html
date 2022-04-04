@@ -13,7 +13,7 @@
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <link rel="icon" type="image/png" sizes="192x192"
         href="https://file.hstatic.net/1000026716/file/favicon_0db2583fad1443e482491c7db08765e6.png" />
     <link rel="stylesheet" href="css/reset.css" />
@@ -64,8 +64,7 @@
                     </div>
                     <div class="liList quanLyDiemDon"><a href="#">Quản lý điểm đón</a>
                     </div>
-                    <div class="liList thongKe"><a href="#">Thống kê</a>
-                    </div>
+                    
                 </div>
 
             </div>
@@ -165,12 +164,13 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <!-- <th scope="col">Id</th> -->
+
 
                                 <th scope="col">Tên đăng nhập</th>
                                 <th scope="col">Họ</th>
                                 <th scope="col">Tên</th>
                                 <th scope="col">Số điện thoại</th>
+                                <th scope="col">Xóa</th>
                             </tr>
                         </thead>
                         <tbody class="danhSachNhanVien">
@@ -231,7 +231,7 @@
                             aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3 abc">
-                        <select id="id_route" class="form-select"
+                        <select id="id_routets" class="form-select"
                             aria-label="Default select example">
                             <option selected>Chọn tuyến</option>
 
@@ -260,52 +260,94 @@
                 </div>
             </div>
             <div id="phanTuyenBus" class="rightx ">
-                <div class="select">
-                    <div class="tuyen">
-                        <select id="id_routex" class="form-select"
-                            aria-label="Default select example">
-                            <option selected>Chọn tuyến</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-                    <div class="xeBus">
-                        <select id="id_busx" class="form-select"
-                            aria-label="Default select example">
-                            <option selected>Chọn xe</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
+                <div class="noBieuDo">
+                    <h3 style="text-align: center;padding: 15px 0;">Phân tuyến cho xe bus</h3>
+                    <div class="select">
+                        <div class="tuyen">
+                            <select id="idRoute" class="form-select">
 
-                    <div class="btn-group" role="group" aria-label="Basic example">
+                            </select>
+                        </div>
+                        <div class="xeBus">
+                            <select id="id_busx" class="form-select">
+                                <option value="null">Bus đã phân hết</option>
+                            </select>
+                        </div>
 
-                        <button type="button" class="btn btn-primary">Submid</button>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+
+                            <button id="btnThemTuyen" type="button"
+                                class="btn btn-primary">Submid</button>
+                        </div>
+                    </div>
+                    <div class="bangPhanTuyen">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+
+                                    <th scope="col">Tuyến</th>
+                                    <th scope="col">Xe</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr> <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr> <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr> <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr> <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr> <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr> <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr> <tr>
+                                    <td>Otto</td>
+
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="bangPhanTuyen">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">STT</th>
+                <div class="bieuDo">
+                    <canvas id="myChart" style="height: 550px; width:100%;max-width:600px"></canvas>
 
-                                <th scope="col">Tuyến</th>
-                                <th scope="col">Xe</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Otto</td>
-
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                    <h4 style="text-align: center;">Biểu đồ học sinh đăng kí điểm đón</h4>
+                    
                 </div>
             </div>
             <div id="quanLyCaLamViec" class="rightx ">
@@ -340,13 +382,13 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">STT</th>
-                                <th scope="col">Tài xế</th>
-                                <th scope="col">Bus</th>
+
                                 <th scope="col">Ngày làm</th>
+                                <th scope="col">Bus</th>
+                                <th scope="col">Ca làm</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="DSLLVCTX">
 
                         </tbody>
                     </table>
@@ -431,10 +473,7 @@
                         nhật</button>
                 </div>
             </div>
-            <div id="thongKe" class="rightx">
-                <h3>Thống kê</h3>
-              
-            </div>
+            
         </div>
     </div>
 
