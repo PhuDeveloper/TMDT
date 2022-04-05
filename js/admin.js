@@ -721,8 +721,13 @@ const getDanhSachPhanTuyenBus = () => {
     },
   });
 };
+
 $(document).on("click", "i[name='suaTram']", function (e) {
   var id_station = $(this).closest("tr").attr("id_station");
+  localStorage.setItem("idEditDiemDon", id_station);
+});
+$("#capNhatDiemDon").click(function (e) {
+  var id_station = localStorage.getItem("idEditDiemDon");
   var position = $("#positionUp").val();
   var price = $("#priceUp").val();
   var name_station = $("#name_stationUp").val();

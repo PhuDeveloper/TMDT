@@ -55,7 +55,7 @@
                 <div class="listOption">
                     <div class="liList dangKiDiemDon"><a href="#">Đăng kí điểm đón</a></div>
                     <div class="liList danhSachDangKi"><a href="#">Quản lý điểm đón</a></div>
-
+                    <div class="liList xinNghi"><a href="#">Xin nghỉ</a></div>
                     <div class="liList dongHocPhi"><a href="#">Đóng học phí </a></div>
 
                 </div>
@@ -141,6 +141,69 @@
                                     <button type="button" id="huyDangKiDiemDon"
                                         data-bs-dismiss="modal" class="btn btn-primary">Hủy đăng
                                         kí</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div id="xinNghi" class="rightx ">
+                <h3 style="text-align: center;padding: 20px 0px;">Báo vắng học</h3>
+                <div class="dSachDangKi">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+
+
+                                <th scope="col">Mã học sinh</th>
+                                <th scope="col">Họ</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Xin vắng</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody class="DSCon">
+
+
+
+                        </tbody>
+                    </table>
+
+
+                    <div class="modal fade" id="modalXinnghi" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Chọn ngày và lý do vắng</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group mb-3 ">
+
+                                        <input id="dates" type="date" class="form-control" placeholder="Giá"
+                                            aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3 ">
+                                        <select id="id_reason_absent" class="form-select"
+                                            aria-label="Default select example">
+                                          
+                                            <option selected></option>
+                
+                                        </select>
+                
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" id="btnXinNghiChoCon" data-bs-dismiss="modal" class="btn btn-primary">Báo vắng</button>
                                 </div>
                             </div>
                         </div>

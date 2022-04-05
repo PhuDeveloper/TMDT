@@ -15,6 +15,7 @@ $(document).ready(function () {
     $("#doiThongTinCaNhan").hide();
     $("#danhSachDangKi").hide();
     $("#xemNgayVangHoc").hide();
+    $("#xinNghi").hide();
   });
   $(".dongHocPhi").click(function async(e) {
     $("#thongtinphuhuynh").hide();
@@ -24,6 +25,7 @@ $(document).ready(function () {
     $("#doiThongTinCaNhan").hide();
     $("#danhSachDangKi").hide();
     $("#xemNgayVangHoc").hide();
+    $("#xinNghi").hide();
   });
   $(".doiThongTinCaNhan").click(function async(e) {
     loadThongTinPhuHuynh();
@@ -34,6 +36,7 @@ $(document).ready(function () {
     $("#doiThongTinCaNhan").show();
     $("#danhSachDangKi").hide();
     $("#xemNgayVangHoc").hide();
+    $("#xinNghi").hide();
   });
   $(".doiMatKhau").click(function async(e) {
     $("#thongtinphuhuynh").hide();
@@ -43,6 +46,7 @@ $(document).ready(function () {
     $("#doiThongTinCaNhan").hide();
     $("#danhSachDangKi").hide();
     $("#xemNgayVangHoc").hide();
+    $("#xinNghi").hide();
   });
   $(".danhSachDangKi").click(function async(e) {
     loadDanhSachDangKi();
@@ -53,8 +57,19 @@ $(document).ready(function () {
     $("#doiThongTinCaNhan").hide();
     $("#danhSachDangKi").show();
     $("#xemNgayVangHoc").hide();
+    $("#xinNghi").hide();
   });
-
+  $(".xinNghi").click(function async(e) {
+    loadDanhSachDangKiXinNghi();
+    $("#thongtinphuhuynh").hide();
+    $("#dangKiDiemDon").hide();
+    $("#dongHocPhi").hide();
+    $("#doiMatKhau").hide();
+    $("#doiThongTinCaNhan").hide();
+    $("#danhSachDangKi").hide();
+    $("#xemNgayVangHoc").hide();
+    $("#xinNghi").show();
+  });
   setTimeout(loadHocKi, 1000);
   setTimeout(loadDanhSachCon, 2000);
 });
@@ -123,6 +138,88 @@ const loadDanhSachCon = () => {
     },
   });
 };
+const loadDanhSachDangKiXinNghi = () => {
+  var idPhuHuynh = localStorage.getItem("idPhuHuynh");
+  var idSemester = id_semester;
+  var tmp = { id_parent: idPhuHuynh, id_semester: idSemester };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get-list-register-station-by-semester-by-parent",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log(res[0].is_cancelled);
+
+      $(".DSCon").empty();
+      $.each(res, function (index, item) {
+        if (item.is_cancelled == false) {
+          tenHsTmp = item.first_name + " " + item.last_name;
+          let tr =
+            '<tr id="hov" name="xemNgayVangHoc" idXinnghi="' +
+            item.id_register +
+            '">';
+
+          tr += "<td>" + item.id_student + "</td>";
+          tr += "<td>" + item.first_name + "</td>";
+          tr += "<td>" + item.last_name + "</td>";
+
+          tr += "<td>";
+          tr +=
+            '<button style="border: none;" data-bs-toggle="modal" data-bs-target="#modalXinnghi" name="xinNghi" class="fa-solid fa-trash"></button>';
+
+          tr += "</tr>";
+
+          $(".DSCon").append(tr);
+        }
+      });
+    },
+  });
+};
+var idRegisterXinNghi;
+const loadLyDoNghi = () => {
+  $.ajax({
+    type: "GET",
+    url: "http://127.0.0.1:5000/get-list-reason-absence",
+    success: function (res) {
+      console.log(res);
+      var html = res.map((value, index) => {
+        return `
+     <option value=${value.id_absent}>${value.reason}</option>
+     `;
+      });
+      document.getElementById("id_reason_absent").innerHTML = html.join("");
+    },
+  });
+};
+$(document).on("click", "button[name='xinNghi']", function () {
+  idRegisterXinNghi = $(this).closest("tr").attr("idXinnghi");
+
+  loadLyDoNghi();
+});
+const xacNhanXinNghi = () => {
+  var date = $("#dates").val();
+  var id_register = idRegisterXinNghi;
+  var id_reason_absent = $("#id_reason_absent").find(":selected").val();
+  var tmp = {
+    date: date,
+    id_reason_absent: id_reason_absent,
+    id_register: id_register,
+  };
+  var data=JSON.stringify(tmp)
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/insert-absent-student",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+     alert(res.info)
+    },
+  });
+};
+$("#btnXinNghiChoCon").click(xacNhanXinNghi);
 $(document).on("click", "i[name='dangKi']", function () {
   $(".maHocSinhConDangKi").text(mHSTmp);
   $(".tenConDangKi").text(tHSTmp);
@@ -305,34 +402,32 @@ const loadDanhSachDangKi = () => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-      console.log(res[0].is_cancelled)
-      
-        $(".DSDKTram").empty();
-        $.each(res, function (index, item) {
-          if(item.is_cancelled==false){
+      console.log(res[0].is_cancelled);
 
-            tenHsTmp = item.first_name + " " + item.last_name;
-            let tr =
-              '<tr id="hov" name="xemNgayVangHoc" idHuyDk="' +
-              item.id_register +
-              '">';
-  
-            tr += "<td>" + item.id_student + "</td>";
-            tr += "<td>" + item.first_name + "</td>";
-            tr += "<td>" + item.last_name + "</td>";
-            tr += "<td>" + item.name_station + "</td>";
-            tr += "<td>" + Math.floor(item.price) + "</td>";
-  
-            tr += "<td>";
-            tr +=
-              '<button style="border: none;" name="huyDangKiDiemDon" data-bs-toggle="modal" data-bs-target="#exampleModal11" class="fa-solid fa-trash"></button>';
-  
-            tr += "</tr>";
-  
-            $(".DSDKTram").append(tr);
-          }
-        });
-      
+      $(".DSDKTram").empty();
+      $.each(res, function (index, item) {
+        if (item.is_cancelled == false) {
+          tenHsTmp = item.first_name + " " + item.last_name;
+          let tr =
+            '<tr id="hov" name="xemNgayVangHoc" idHuyDk="' +
+            item.id_register +
+            '">';
+
+          tr += "<td>" + item.id_student + "</td>";
+          tr += "<td>" + item.first_name + "</td>";
+          tr += "<td>" + item.last_name + "</td>";
+          tr += "<td>" + item.name_station + "</td>";
+          tr += "<td>" + Math.floor(item.price) + "</td>";
+
+          tr += "<td>";
+          tr +=
+            '<button style="border: none;" name="huyDangKiDiemDon" data-bs-toggle="modal" data-bs-target="#exampleModal11" class="fa-solid fa-trash"></button>';
+
+          tr += "</tr>";
+
+          $(".DSDKTram").append(tr);
+        }
+      });
     },
   });
 };
