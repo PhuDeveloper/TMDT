@@ -394,13 +394,14 @@ const getDanhSachLichLamCacTaiXe = () => {
     url: "http://127.0.0.1:5000/get-list-driver-work-date",
 
     success: function (res) {
-      console.log(res);
+      console.log(res, "lịch làm");
       $(".DSLLVCTX").empty();
       $.each(res, function (index, item) {
         let tr = '<tr idSchedule="' + item.id_schedule + '">';
 
         tr += "<td>" + item.date_work + "</td>";
         tr += "<td>" + item.bus_plate + "</td>";
+        tr += "<td>" + item.full_name + "</td>";
         tr += "<td>" + item.shift + "</td>";
 
         tr += "<td>";
@@ -725,6 +726,21 @@ const getDanhSachPhanTuyenBus = () => {
 $(document).on("click", "i[name='suaTram']", function (e) {
   var id_station = $(this).closest("tr").attr("id_station");
   localStorage.setItem("idEditDiemDon", id_station);
+  var tmp = { id_station: id_station };
+  var data = JSON.stringify(tmp);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/get-station-by-id",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      console.log("ftt", res);
+      $("#name_stationUp").val(res[0].name_station);
+      $("#priceUp").val(Math.floor(res[0].price));
+      $("#positionUp").val(res[0].position);
+    },
+  });
 });
 $("#capNhatDiemDon").click(function (e) {
   var id_station = localStorage.getItem("idEditDiemDon");

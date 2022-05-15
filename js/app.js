@@ -94,7 +94,7 @@ const taoMoiTaikhoan = () => {
       var address = $("#diachiPH").val();
       var password = $("#mk1PH").val();
       var listStudent = res;
-      console.log(listStudent)
+      console.log(listStudent);
       var tmp = {
         email: email,
         phone_num: phone_num,
@@ -106,16 +106,23 @@ const taoMoiTaikhoan = () => {
       };
       var data = JSON.stringify(tmp);
       console.log(data);
-      $.ajax({
-        type: "POST",
-        url: "http://127.0.0.1:5000/register-parent",
-        data: data,
-        dataType: "json",
-        contentType: "application/json",
-        success: function async(res) {
-          console.log(res);
-        },
-      });
+      setTimeout(() => {
+        $.ajax({
+          type: "POST",
+          url: "http://127.0.0.1:5000/register-parent",
+          data: data,
+          dataType: "json",
+          contentType: "application/json",
+          success: function async(res) {
+            if (res.result == true) {
+              alert("Tạo tài khoản thành công");
+              window.location = "dangNhap.html";
+            } else {
+              alert("Tạo tài khoản thất bại");
+            }
+          },
+        });
+      }, 2000);
     },
   });
 

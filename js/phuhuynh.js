@@ -207,7 +207,7 @@ const xacNhanXinNghi = () => {
     id_reason_absent: id_reason_absent,
     id_register: id_register,
   };
-  var data=JSON.stringify(tmp)
+  var data = JSON.stringify(tmp);
   $.ajax({
     type: "POST",
     url: "http://127.0.0.1:5000/insert-absent-student",
@@ -215,7 +215,7 @@ const xacNhanXinNghi = () => {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
-     alert(res.info)
+      alert(res.info);
     },
   });
 };
@@ -485,6 +485,7 @@ $("#btnXemNgayVang").click(function (e) {
     dataType: "json",
     contentType: "application/json",
     success: function (res) {
+      console.log("ttttt", res);
       var resDt = res.map((val, idx) => {
         if (val.bus_plate == null) {
           val.bus_plate = "--";
@@ -493,7 +494,56 @@ $("#btnXemNgayVang").click(function (e) {
           val.time_pick_up = "--";
         }
         if (val.reason == null) {
-          val.reason = " ";
+          val.reason = "--";
+        }
+      });
+
+      $(".DSV").empty();
+      $.each(res, function (index, item) {
+        if (item.bus_plate == "--") {
+          let tr = '<tr  idHuyDk="' + item.id_bus + '">';
+
+          tr += "<td>" + item.bus_plate + "</td>";
+          tr += "<td>" + item.date + "</td>";
+          tr += "<td>" + item.time_pick_up + "</td>";
+          tr += "<td>" + item.reason + "</td>";
+
+          tr += "<td>";
+
+          tr += "</tr>";
+
+          $(".DSV").append(tr);
+        }
+      });
+    },
+  });
+});
+$("#btnXemNgayVangAll").click(function (e) {
+  var from_date = $("#from_date").val();
+  var to_date = $("#to_date").val();
+  var tmp = {
+    from_date: from_date,
+    to_date: to_date,
+    id_register: 2,
+  };
+  var data = JSON.stringify(tmp);
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:5000/statistic-student-go-school-bus",
+    data: data,
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      var resDt = res.map((val, idx) => {
+        if (val.bus_plate == null) {
+          val.bus_plate = "--";
+        }
+        if (val.time_pick_up == null) {
+          val.time_pick_up = "--";
+        }
+        if (val.reason == null) {
+          val.reason = "--";
         }
       });
 

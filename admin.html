@@ -257,37 +257,45 @@
 
                         </tbody>
                     </table>
-                    <div class="modal fade" id="suaTramzz" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="suaTramzz" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông tin trạm</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="input-group mb-3 abc">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Cập nhật thông
+                                        tin trạm</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group mb-3 abc">
 
-                                    <input id="name_stationUp" type="text" class="form-control"
-                                        placeholder="Tên điểm đón" aria-describedby="basic-addon1">
+                                        <input disabled id="name_stationUp" type="text"
+                                            class="form-control" placeholder="Tên điểm đón"
+                                            aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3 abc">
+
+                                        <input disabled id="positionUp" type="text"
+                                            class="form-control" placeholder="Địa chỉ"
+                                            aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3 abc">
+
+                                        <input id="priceUp" type="text" class="form-control"
+                                            placeholder="Giá" aria-describedby="basic-addon1">
+                                    </div>
                                 </div>
-                                <div class="input-group mb-3 abc">
-            
-                                    <input id="positionUp" type="text" class="form-control" placeholder="Địa chỉ"
-                                        aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group mb-3 abc">
-            
-                                    <input id="priceUp" type="text" class="form-control" placeholder="Giá"
-                                        aria-describedby="basic-addon1">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" id="capNhatDiemDon"
+                                        class="btn btn-primary" data-bs-dismiss="modal">Cập
+                                        nhật</button>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="button" id="capNhatDiemDon" class="btn btn-primary" data-bs-dismiss="modal">Cập nhật</button>
-                            </div>
-                          </div>
                         </div>
-                      </div>
+                    </div>
 
                 </div>
             </div>
@@ -368,9 +376,9 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-
                                 <th scope="col">Ngày làm</th>
                                 <th scope="col">Bus</th>
+                                <th scope="col">Tài xế</th>
                                 <th scope="col">Ca làm</th>
                             </tr>
                         </thead>
